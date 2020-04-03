@@ -1,0 +1,129 @@
+{% extends 'css_js_base.html' %}
+{% block body %}
+    <div style="
+    width: 250px;
+">
+
+        <h3 style="
+    margin-left: 50px;
+    margin-top: 60px;text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444;
+
+    font-weight: 600;
+">车辆通过</h3>
+        <h5 style="
+    margin-left: 50px;
+    font-weight: 400;
+">扫描识别车牌号</h5>
+
+        <ul class="navbar-nav mr-lg-4 w-100" style="
+    height: 100px;
+    margin-top: 50px;
+    margin-left: 20px;
+    width: 200px;
+">
+            <form method="POST">
+                {% csrf_token %}
+            <div class="input-group" style="
+    width: 200px;
+">
+                <div class="input-group-prepend">
+				                <span class="input-group-text" id="search" style="
+    height: 46px;
+">
+				                	<i class="mdi mdi-circle-outline menu-icon"></i>
+				                </span>
+                </div>
+                <input type="text" class="form-control" name = "car_id" placeholder="车牌号" aria-label="car_id" aria-describedby="car_id">
+                <span class="input-group-text" style="
+    height: 46px;
+    width: 50px;
+    padding-left: .;
+    padding-right: 0px;
+    padding-left: -10;
+    border-left-width: -10;
+    padding-left: -10;
+    padding-left: 0px;
+">
+                                    <input type = "submit" class="btn btn-default" name ="sig" value="提交"  style="padding-left: 10px;">
+{#                        			<button class="btn btn-default" type="button" id="bu"#}
+{#                                            {{  flag }}#}
+{#                                            onclick="window.location.href='{% url 'manager:car3' %}'"#}
+{#                                            onclick="check('bu','car_id')"#}
+{#                                            style="#}
+{#    padding-left: 10px;#}
+{#">Go</button>#}
+                </span>
+{#            </div>#}
+{#                <script>#}
+{#                    function check(bu,inp) {#}
+{#                        var inpp = document.getElementById(inp).value;#}
+{#                        {% for now in park_now %}#}
+{#                            if( inpp === {{ now.car_id }}){#}
+{#                                window.location.href='{% url 'manager:car2' %}';#}
+{#                                return;#}
+{#                            }#}
+{##}
+{#                        {% endfor %}#}
+{#                        window.location.href='{% url 'manager:car3' %}';#}
+{#                    }#}
+{#                </script>#}
+
+
+            </div>
+            </form>
+        </ul>
+
+
+        <h3 style="
+    margin-left: 50px;
+    margin-top: 60px;text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444;
+
+    font-weight: 600;
+">车辆升级VIP</h3>
+        <h5 style="
+    margin-left: 50px;
+    font-weight: 400;
+">输入车牌号</h5>
+
+
+        <ul class="navbar-nav mr-lg-4 w-100" style="
+    height: 100px;
+    margin-top: 50px;
+    margin-left: 20px;
+    width: 200px;
+">
+            <form method="POST">
+                {% csrf_token %}
+            <div class="input-group" style="
+    width: 200px;
+">
+                <div class="input-group-prepend">
+				                <span class="input-group-text" id="search" style="
+    height: 46px;
+">
+				                	<i class="mdi mdi-circle-outline menu-icon"></i>
+				                </span>
+                </div>
+                <input type="text" class="form-control" name = "car_id" placeholder="车牌号" aria-label="car_id" aria-describedby="car_id">
+
+                <span class="input-group-text" style="
+    height: 46px;
+    width: 50px;
+    padding-left: .;
+    padding-right: 0px;
+    padding-left: -10;
+    border-left-width: -10;
+    padding-left: -10;
+    padding-left: 0px;
+">
+                    <input type = "submit" class="btn btn-default" name ="sig" value="升级"  style="padding-left: 10px;">
+                    			</span>
+
+
+            </div>
+            </form>
+        </ul>
+
+
+    </div>
+{% endblock body %}

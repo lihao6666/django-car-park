@@ -1,0 +1,36 @@
+{% extends 'css_js_base.html' %}
+{% block body %}
+  
+     
+                    <div style="
+    width: 250px;
+    padding-top: 50px;
+    padding-left: 30px;
+">
+					<h3 style="text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444;
+
+    font-weight: 600;
+">{{ area }}区 {{ spot_num }}号</h3>
+                    <h5 style="
+    font-weight: 400;
+    
+">车位异常</h5>
+					
+                    <div class="form-group" style="
+    margin-top: 50px;
+">
+                      <label for="exampleTextarea1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">异常信息</font></font></label>
+                      <textarea class="form-control" id="exampleTextarea1" rows="4" >{{ error_message}}</textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary mr-2" onclick="window.location.href='{% url 'manager:spot1' %}'" style="
+    margin-top: 10px;
+"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">处理完成</font></font></button>
+                    
+                    <button class="btn btn-light" onclick="window.location.href='{% url 'manager:spot1' %}'" style="
+    margin-top: 10px;
+"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">返回</font></font></button>
+                      
+                      
+                    </div>
+{% endblock body %}

@@ -1,0 +1,107 @@
+{% extends 'css_js_base.html' %}
+{% block body %}
+    <div class="container-fluid page-body-wrapper" style="
+    padding-top: 0px;
+">
+<nav class="sidebar sidebar-offcanvas" id="sidebar" style="
+    width: 258px;
+">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'message:park_now_list' %}">
+              <i class="mdi mdi-view-headline menu-icon"></i>
+              <span class="menu-title">当前停放车辆</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'message:park_his_list' %}">
+              <i class="mdi mdi-file-outline menu-icon"></i>
+              <span class="menu-title">历史停放车辆</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'message:park_info_list' %}">
+              <i class="mdi mdi-chart-pie menu-icon"></i>
+              <span class="menu-title">车位信息</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'message:park_error_list' %}">
+              <i class="mdi mdi-information-outline menu-icon"></i>
+              <span class="menu-title">异常车位</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'message:vip_car_list' %}">
+              <i class="mdi mdi-emoticon menu-icon"></i>
+              <span class="menu-title">VIP车辆</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'message:tip_info_list' %}">
+              <i class="mdi mdi-bell-ring-outline menu-icon"></i>
+              <span class="menu-title">消息</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="main-panel" id ="parking_main">
+        <div class="content-wrapper">
+        	<div class="row">
+
+          		<div class="col-md-12 stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">历史停车信息</p>
+                  <div class="table-responsive">
+                    <table id="recent-purchases-listing" class="table">
+                      <thead>
+                        <tr>
+                            <th>车牌号</th>
+                            <th>入库时间</th>
+                            <th>出库时间</th>
+                            <th>车区</th>
+                            <th>车位号</th>
+                            <th>费用/元</th>
+                            <th>操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for his in park_his %}
+                       <tr role="row" class="odd">
+                          <td class="sorting_1">{{ his.car_id }}</td>
+                          <td>{{ his.begin_time }}</td>
+                           <td>{{ his.end_time }}</td>
+                           {% if his.park.area == 0 %}
+                              <td>A</td>
+                           {% elif his.park.area == 1 %}
+                             <td>B</td>
+                           {% elif his.park.area == 2 %}
+                             <td>C</td>
+                           {% elif his.park.area == 3 %}
+                             <td>D</td>
+                           {% endif %}
+                          <td>{{ his.park.spot_num }}</td>
+                          <td>{{ his.money }}</td>
+                          <td>
+                          <form method="POST">
+                              {% csrf_token %}
+                              <button type="submit" class="btn btn-inverse-danger btn-fw" name ="delete" value="{{ his.car_id }}">删除</button>
+                          </form>
+                          </td>
+                       </tr>
+
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+         	</div>
+        </div>
+
+      </div>
+{% endblock %}

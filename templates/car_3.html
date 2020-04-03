@@ -1,0 +1,30 @@
+{% extends 'css_js_base.html' %}
+{% block body %}
+  
+     
+                    <div style="
+    width: 250px;
+">
+                    <h3 style="
+    margin-left: 50px;
+    margin-top: 60px;text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444;
+
+    font-weight: 600;
+">{{ car_id }}</h3>
+                    <h5  style="
+    margin-left: 50px;
+    font-weight: 400;
+">结算费用</h5>
+					<h1 style="margin-left: 50px;margin-top: 50px;"><font style="vertical-align: inherit;text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444;font-weight: 600;">
+                      12.00</font>
+					<small class="text-muted"><font style="vertical-align: inherit;">
+                        元
+                      </font>
+                      </small>
+                    </h1>
+                    <button type="submit" onclick="window.location.href='{% url 'manager:car1' %}'" class="btn btn-primary mr-2" style="
+    margin-left: 60px;
+    margin-top: 50px;
+">结算完成</button>
+                    </div>
+{% endblock body %}

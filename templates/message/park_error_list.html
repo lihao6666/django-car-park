@@ -1,0 +1,114 @@
+{% extends 'css_js_base.html' %}
+{% block body %}
+    <div class="container-fluid page-body-wrapper" style="
+    padding-top: 0px;
+">
+	<nav class="sidebar sidebar-offcanvas" id="sidebar" style="
+    width: 258px;
+">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'message:park_now_list' %}">
+              <i class="mdi mdi-view-headline menu-icon"></i>
+              <span class="menu-title">当前停放车辆</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'message:park_his_list' %}">
+              <i class="mdi mdi-file-outline menu-icon"></i>
+              <span class="menu-title">历史停放车辆</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'message:park_info_list' %}">
+              <i class="mdi mdi-chart-pie menu-icon"></i>
+              <span class="menu-title">车位信息</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'message:park_error_list' %}">
+              <i class="mdi mdi-information-outline menu-icon"></i>
+              <span class="menu-title">异常车位</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'message:vip_car_list' %}">
+              <i class="mdi mdi-emoticon menu-icon"></i>
+              <span class="menu-title">VIP车辆</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'message:tip_info_list' %}">
+              <i class="mdi mdi-bell-ring-outline menu-icon"></i>
+              <span class="menu-title">消息</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="main-panel" id ="parking_main">
+        <div class="content-wrapper">
+        	<div class="row">
+
+          		<div class="col-md-12 stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">异常车位信息</p>
+                  <div class="table-responsive">
+                    <div id="recent-purchases-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                        <div class="col-sm-12">
+                            <table id="recent-purchases-listing" class="table dataTable no-footer" role="grid">
+                      <thead>
+                        <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="recent-purchases-listing" rowspan="1" colspan="1" aria-sort="ascending" aria-label="车区: activate to sort column descending" style="width: 129.4px;">车区</th><th class="sorting" tabindex="0" aria-controls="recent-purchases-listing" rowspan="1" colspan="1" aria-label="车位号: activate to sort column ascending" style="width: 165.4px;">车位号</th><th class="sorting" tabindex="0" aria-controls="recent-purchases-listing" rowspan="1" colspan="1" aria-label="异常信息: activate to sort column ascending" style="width: 200.6px;">异常信息</th><th class="sorting" tabindex="0" aria-controls="recent-purchases-listing" rowspan="1" colspan="1" aria-label="操作: activate to sort column ascending" style="width: 80px;">操作</th></tr>
+                      </thead>
+                      <tbody>
+                      {% for error in park_error %}
+                      <tr role="row" class="odd">
+                            {% if error.park.area == 0 %}
+                              <td id="area">A</td>
+                           {% elif error.park.area == 1 %}
+                             <td id="area">B</td>
+                           {% elif error.park.area == 2 %}
+                             <td id="area">C</td>
+                           {% elif error.park.area == 3 %}
+                             <td id="area">D</td>
+                           {% endif %}
+                            <td id="spot_num">{{ error.park.spot_num }}</td>
+                            <td id="error_message">{{ error.error_message }}</td>
+                            <td>
+                                    {% csrf_token %}
+                                <button class="btn btn-inverse-success btn-fw" id = "delete" value="{{ error.park }}" onclick="date()">处理完成</button>
+                            </td>
+                      </tr>
+                          <script>
+                                    function date() {
+                                        var area = $("#area").text();
+                                        var spot_num = $("#spot_num").text();
+                                        var error = $("#error_message").text();
+                                        $.post({
+                                            type:"POST",
+                                            url:"{% url 'message:park_error_list'%}",
+                                            data:{
+                                                area_id:area,
+                                                spot_id:spot_num,
+                                                error_message:error,
+                                                park:$("#delete").val(),
+                                        }
+                                        })
+                                    }
+                                </script>
+                      {% endfor %}
+                        </tbody>
+                    </table>
+                        </div>
+                    </div><div class="row"><div class="col-sm-12 col-md-5"></div><div class="col-sm-12 col-md-7"></div></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+         	</div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

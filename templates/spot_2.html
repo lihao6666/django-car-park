@@ -1,0 +1,49 @@
+{% extends 'css_js_base.html' %}
+{% block body %}
+     
+                    <div style="
+    width: 250px;
+    padding-top: 50px;
+    padding-left: 30px;
+">
+					<h3 style="text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444;
+
+    font-weight: 600;
+">添加异常信息</h3>
+{#                    <h5 style="#}
+{#    font-weight: 400;#}
+{#    #}
+{#">输入信息</h5>#}
+					<form method="POST" action="{% url 'manager:spot2' %}">
+                        {% csrf_token %}
+                    <div class="form-group" style="
+    margin-top: 50px;
+">
+                        <<input value="{{ park_id }}" name="car_id" style="display: none">
+                      <label for="exampleTextarea1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">异常信息</font></font></label>
+                        <select class="form-control form-control-lg" id="exampleFormControlSelect2" name="dropdown2" style="
+    height: 45px;
+    width: 210px;
+    padding-right: 0px;
+    padding-left: 10px;
+    font-weight: bolder;
+    color: black;
+    ">
+                    <option value="0">积水</option>
+                    <option value="1">地面凹陷</option>
+                    <option value="2">施工中</option>
+                    <option value="3">有玻璃残渣</option>
+                </select>
+{#                      <textarea class="form-control" id="exampleTextarea1" name ="error_message" rows="4"></textarea>#}
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2" style="
+    margin-top: 10px;
+"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">提交</font></font></button>
+                    <button class="btn btn-light" onclick="window.location.href='{% url 'manager:spot1' %}'" style="
+    margin-top: 10px;
+"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">返回</font></font></button>
+                    </form>
+                      
+                      
+                    </div>
+{% endblock body %}

@@ -1,0 +1,747 @@
+
+
+<script>
+    var freea = 0
+    var busya = 0
+    var errora = 0
+    var freeb = 0
+    var busyb = 0
+    var errorb = 0
+    var freec = 0
+    var busyc = 0
+    var errorc = 0
+    var freed = 0
+    var busyd = 0
+    var errord = 0
+</script>
+<div class="main-panel" id="parking_main">
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="grid-margin grid-margin-lg-0 stretch-card">
+                    <div class="row" style="width: 800px;height: 650px;">
+                        <div class="col-md-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body dashboard-tabs p-0">
+                                    <ul class="nav nav-tabs px-4" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="a-area" data-toggle="tab"
+                                               href="#overview" role="tab" aria-controls="overview"
+                                               aria-selected="true"><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">A区 35</font></font></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="b-area" data-toggle="tab" href="#sales"
+                                               role="tab" aria-controls="sales" aria-selected="false"><font
+                                                    style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">B区 35</font></font></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="c-area" data-toggle="tab" href="#purchases"
+                                               role="tab" aria-controls="purchases" aria-selected="false"><font
+                                                    style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">C区 35</font></font></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="d-area" data-toggle="tab" href="#area"
+                                               role="tab" aria-controls="d-area" aria-selected="false"><font
+                                                    style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">D区 35</font></font></a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content py-0 px-0">
+                                        <div class="tab-pane fade show active" id="overview" role="tabpanel"
+                                             aria-labelledby="a-area">
+                                            <div class="d-flex flex-wrap justify-content-xl-between"
+                                                 style="word-wrap:break-word;word-break:break-all; ">
+                                                {% for state in park_state %}
+                                                    {% if state.park.area == 0 %}
+
+
+                                                    <div class="nav-item dropdown" style="
+    width: 70px;
+    height: 70px;
+    margin:20px;
+">
+
+                                                        <a class="nav-link count-indicator d-flex align-items-center justify-content-center notification-dropdown"
+                                                           id="notificationDropdown" href="#" data-toggle="dropdown"
+                                                           aria-expanded="true" style="
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+
+">
+                                                            <script type="text/javascript">
+                                                                var area = {{ state.park.area }};
+                                                                var state = {{ state.state }};
+                                                                if (area === 0) {
+                                                                    if (state === 0) {
+                                                                        freea += 1;
+                                                                        document.write("<img alt='' src='/static/images/free.png' style='width: 70px;'>");
+                                                                    } else if (state === 1) {
+                                                                        busya += 1;
+                                                                        document.write("<img alt='' src='/static/images/busy.png' style='width: 70px;'>");
+                                                                    } else {
+                                                                        errora += 1;
+                                                                        document.write("<img alt='' src='/static/images/error3.png' style='width: 70px;'>");
+                                                                    }
+                                                                }
+
+
+                                                            </script>
+                                                        </a>
+                                                        <h4 style="text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444;color: blue;text-align: center;padding-top: 10px;">
+                                                            <font style="vertical-align: inherit;"><font
+                                                                    style="vertical-align: inherit;">{{ state.id  }}</font></font>
+                                                        </h4>
+
+                                                        <div class="dropdown-menu dropdown-menu-left navbar-dropdown"
+                                                             aria-labelledby="notificationDropdown"
+                                                             x-placement="bottom-end"
+                                                             style="position: absolute;will-change: transform;top: 0px;left: 0px;transform: translate3d(-97px, 89px, 0px); {% if state.state == 0 %} display:none;{% endif %}">
+                                                            <p class="mb-0 font-weight-normal float-left dropdown-header"
+                                                               style="font-size: 20px; font-weight: bolder;text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444; color: orange;">
+                                                                <font style="vertical-align: inherit;"><font
+                                                                        style="vertical-align: inherit;">A区 {{ state.park.id }}号</font></font>
+                                                            </p>
+                                                            {% if state.state == 1 %}
+                                                            <a class="dropdown-item">
+                                                                <div class="item-content">
+                                                                    <h6 class="font-weight-normal"><font
+                                                                            style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                           {{ state.park.parks.values.first.car_id}}</font></font>
+                                                                    </h6>
+                                                                </div>
+                                                            </a>
+                                                            <a class="dropdown-item">
+
+                                                                <div class="item-content">
+                                                                    <h6 class="font-weight-normal"><font
+                                                                            style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                               {{ state.park.parks.values.first.begin_time}}
+                                                                    </font></font></h6>
+                                                                </div>
+                                                            </a>
+                                                            {% elif state.state == 2 %}
+                                                                <a class="dropdown-item">
+                                                                <div class="item-content">
+                                                                    <h6 class="font-weight-normal"><font
+                                                                            style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                           {{ state.park.error.values.first.error_message}}</font></font>
+                                                                    </h6>
+                                                                </div>
+                                                            </a>
+                                                            {% endif %}
+
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" id="sales" role="tabpanel"
+                                             aria-labelledby="b-area">
+                                            <div class="d-flex flex-wrap justify-content-xl-between">
+                                                    {% for state in park_state %}
+                                                    {% if state.park.area == 1 %}
+
+
+
+                                                    <div class="nav-item dropdown" style="
+    width: 70px;
+    height: 70px;
+    margin:20px;
+">
+
+                                                        <a class="nav-link count-indicator d-flex align-items-center justify-content-center notification-dropdown"
+                                                           id="notificationDropdown" href="#" data-toggle="dropdown"
+                                                           aria-expanded="true" style="
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+
+">
+                                                            <script type="text/javascript">
+                                                                var area = {{ state.park.area }};
+                                                                var state = {{ state.state }};
+                                                                if (area === 1) {
+                                                                    if (state === 0) {
+                                                                        freeb += 1;
+                                                                        document.write("<img alt='' src='/static/images/free.png' style='width: 70px;'>");
+                                                                    } else if (state === 1) {
+                                                                        busyb += 1;
+                                                                        document.write("<img alt='' src='/static/images/busy.png' style='width: 70px;'>");
+                                                                    } else {
+                                                                        errorb += 1;
+                                                                        document.write("<img alt='' src='/static/images/error3.png' style='width: 70px;'>");
+                                                                    }
+                                                                }
+
+
+                                                            </script>
+                                                        </a>
+                                                        <h4 style="text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444;color: blue;text-align: center;padding-top: 10px;">
+                                                            <font style="vertical-align: inherit;"><font
+                                                                    style="vertical-align: inherit;">{{ state.park.spot_num  }}</font></font>
+                                                        </h4>
+
+                                                        <div class="dropdown-menu dropdown-menu-left navbar-dropdown"
+                                                             aria-labelledby="notificationDropdown"
+                                                             x-placement="bottom-end"
+                                                             style="position: absolute;will-change: transform;top: 0px;left: 0px;transform: translate3d(-97px, 89px, 0px); {% if state.state == 0 %} display:none;{% endif %}">
+
+                                                            <p class="mb-0 font-weight-normal float-left dropdown-header"
+                                                               style="font-size: 20px; font-weight: bolder;text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444; color: orange;">
+                                                                <font style="vertical-align: inherit;"><font
+                                                                        style="vertical-align: inherit;">B区 {{ state.park.spot_num }}号</font></font>
+                                                            </p>
+                                                            {% if state.state == 1 %}
+                                                            <a class="dropdown-item">
+
+                                                                <div class="item-content">
+                                                                    <h6 class="font-weight-normal"><font
+                                                                            style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                           {{ state.park.parks.values.first.car_id}}
+                                                                    </font></font>
+                                                                    </h6>
+                                                                </div>
+                                                            </a>
+                                                            <a class="dropdown-item">
+
+                                                                <div class="item-content">
+                                                                    <h6 class="font-weight-normal"><font
+                                                                            style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                            {{ state.park.parks.values.first.begin_time}}
+                                                                    </font></font></h6>
+                                                                </div>
+                                                            </a>
+                                                            {% elif state.state == 2 %}
+                                                                <a class="dropdown-item">
+                                                                <div class="item-content">
+                                                                    <h6 class="font-weight-normal"><font
+                                                                            style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                           {{ state.park.error.values.first.error_message}}</font></font>
+                                                                    </h6>
+                                                                </div>
+                                                            </a>
+                                                                {% endif %}
+
+
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="purchases" role="tabpanel"
+                                             aria-labelledby="c-area">
+                                            <div class="d-flex flex-wrap justify-content-xl-between">
+                                                    {% for state in park_state %}
+                                                    {% if state.park.area == 2 %}
+
+
+                                                    <div class="nav-item dropdown" style="
+    width: 70px;
+    height: 70px;
+    margin:20px;
+">
+
+                                                        <a class="nav-link count-indicator d-flex align-items-center justify-content-center notification-dropdown"
+                                                           id="notificationDropdown" href="#" data-toggle="dropdown"
+                                                           aria-expanded="true" style="
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+
+">
+                                                            <script type="text/javascript">
+                                                                var area = {{ state.park.area }};
+                                                                var state = {{ state.state }};
+                                                                if (area === 2) {
+                                                                    if (state === 0) {
+                                                                        freec += 1;
+                                                                        document.write("<img alt='' src='/static/images/free.png' style='width: 70px;'>");
+                                                                    } else if (state === 1) {
+                                                                        busyc += 1;
+                                                                        document.write("<img alt='' src='/static/images/busy.png' style='width: 70px;'>");
+                                                                    } else {
+                                                                        errorc += 1;
+                                                                        document.write("<img alt='' src='/static/images/error3.png' style='width: 70px;'>");
+                                                                    }
+                                                                }
+
+
+                                                            </script>
+                                                        </a>
+                                                        <h4 style="text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444;color: blue;text-align: center;padding-top: 10px;">
+                                                            <font style="vertical-align: inherit;"><font
+                                                                    style="vertical-align: inherit;">{{ state.park.spot_num  }}</font></font>
+                                                        </h4>
+
+                                                        <div class="dropdown-menu dropdown-menu-left navbar-dropdown"
+                                                             aria-labelledby="notificationDropdown"
+                                                             x-placement="bottom-end"
+                                                             style="position: absolute;will-change: transform;top: 0px;left: 0px;transform: translate3d(-97px, 89px, 0px); {% if state.state == 0 %} display:none;{% endif %}">
+
+                                                            <p class="mb-0 font-weight-normal float-left dropdown-header"
+                                                               style="font-size: 20px; font-weight: bolder;text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444; color: orange;">
+                                                                <font style="vertical-align: inherit;"><font
+                                                                        style="vertical-align: inherit;">C区 {{ state.park.spot_num }}号</font></font>
+                                                            </p>
+                                                            {% if state.state == 1 %}
+                                                            <a class="dropdown-item">
+
+                                                                <div class="item-content">
+                                                                    <h6 class="font-weight-normal"><font
+                                                                            style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                        {{ state.park.parks.values.first.car_id}}
+                                                                    </font></font>
+                                                                    </h6>
+                                                                </div>
+                                                            </a>
+                                                            <a class="dropdown-item">
+
+                                                                <div class="item-content">
+                                                                    <h6 class="font-weight-normal"><font
+                                                                            style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                        {{ state.park.parks.values.first.begin_time}}
+                                                                    </font></font></h6>
+                                                                </div>
+                                                            </a>
+                                                            {% elif state.state == 2 %}
+                                                                    <a class="dropdown-item">
+                                                                    <div class="item-content">
+                                                                        <h6 class="font-weight-normal"><font
+                                                                                style="vertical-align: inherit;"><font
+                                                                                style="vertical-align: inherit;">
+                                                                               {{ state.park.error.values.first.error_message}}</font></font>
+                                                                        </h6>
+                                                                    </div>
+                                                                </a>
+                                                            {% endif %}
+
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    <div class="tab-pane fade" id="area" role="tabpanel"
+                                             aria-labelledby="d-area">
+                                            <div class="d-flex flex-wrap justify-content-xl-between">
+                                                {% for state in park_state %}
+                                                    {% if state.park.area == 3 %}
+
+
+                                                    <div class="nav-item dropdown" style="
+    width: 70px;
+    height: 70px;
+    margin:20px;
+">
+
+                                                        <a class="nav-link count-indicator d-flex align-items-center justify-content-center notification-dropdown"
+                                                           id="notificationDropdown" href="#" data-toggle="dropdown"
+                                                           aria-expanded="true" style="
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+
+">
+                                                            <script type="text/javascript">
+                                                                var area = {{ state.park.area }};
+                                                                var state = {{ state.state }};
+                                                                if (area === 3) {
+                                                                    if (state === 0) {
+                                                                        freed += 1;
+                                                                        document.write("<img alt='' src='/static/images/free.png' style='width: 70px;'>");
+                                                                    } else if (state === 1) {
+                                                                        busyd += 1;
+                                                                        document.write("<img alt='' src='/static/images/busy.png' style='width: 70px;'>");
+                                                                    } else {
+                                                                        errord += 1;
+                                                                        document.write("<img alt='' src='/static/images/error3.png' style='width: 70px;'>");
+                                                                    }
+                                                                }
+
+
+                                                            </script>
+                                                        </a>
+                                                        <h4 style="text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444;color: blue;text-align: center;padding-top: 10px;">
+                                                            <font style="vertical-align: inherit;"><font
+                                                                    style="vertical-align: inherit;">{{ state.park.spot_num  }}</font></font>
+                                                        </h4>
+
+                                                        <div class="dropdown-menu dropdown-menu-left navbar-dropdown"
+                                                             aria-labelledby="notificationDropdown"
+                                                             x-placement="bottom-end"
+                                                             style="position: absolute;will-change: transform;top: 0px;left: 0px;transform: translate3d(-97px, 89px, 0px); {% if state.state == 0 %} display:none;{% endif %}">
+
+                                                            <p class="mb-0 font-weight-normal float-left dropdown-header"
+                                                               style="font-size: 20px; font-weight: bolder;text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444; color: orange;">
+                                                                <font style="vertical-align: inherit;"><font
+                                                                        style="vertical-align: inherit;">D区 {{ state.park.spot_num }}号</font></font>
+                                                            </p>
+                                                            {% if state.state == 1 %}
+                                                            <a class="dropdown-item">
+
+                                                                <div class="item-content">
+                                                                    <h6 class="font-weight-normal"><font
+                                                                            style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                            {{ state.park.parks.values.first.car_id}}
+                                                                    </font></font>
+                                                                    </h6>
+                                                                </div>
+                                                            </a>
+                                                            <a class="dropdown-item">
+
+                                                                <div class="item-content">
+                                                                    <h6 class="font-weight-normal"><font
+                                                                            style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                       {{ state.park.parks.values.first.begin_time}}
+                                                                    </font></font></h6>
+                                                                </div>
+                                                            </a>
+                                                            {% elif state.state == 2 %}
+                                                                    <a class="dropdown-item">
+                                                                    <div class="item-content">
+                                                                        <h6 class="font-weight-normal"><font
+                                                                                style="vertical-align: inherit;"><font
+                                                                                style="vertical-align: inherit;">
+                                                                               {{ state.park.error.values.first.error_message}}</font></font>
+                                                                        </h6>
+                                                                    </div>
+                                                                    </a>
+                                                            {% endif %}
+
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                    </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" grid-margin grid-margin-lg-0 stretch-card" style="
+    margin-left: 30px;
+    width: 400px;
+    height: 600px;
+">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="chartjs-size-monitor"
+                                 style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                <div class="chartjs-size-monitor-expand"
+                                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                </div>
+                                <div class="chartjs-size-monitor-shrink"
+                                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                </div>
+                            </div>
+                            <h4 class="card-title"><font style="vertical-align: inherit;"><font
+                                    style="vertical-align: inherit;">车况汇总</font></font></h4>
+
+                            <div class="nav-item dropdown" style="
+    width: 250px;
+    height: 50px;
+    margin:20px;
+    margin-top: 100px;
+">
+
+                                <a class="nav-link count-indicator d-flex align-items-center justify-content-center notification-dropdown"
+                                   id="notificationDropdown" href="#" data-toggle="dropdown" aria-expanded="false"
+                                   style="
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    width: 300px;
+">
+
+                                    <div class="row">
+                                        <h4 style="
+    padding-left: 10px;
+    width: 110px;
+    height: 20px;
+"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A区</font></font></h4>
+                                        <div class="progress" style="
+    width: 200px;
+    height: 20px;
+">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 25%;"
+                                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+                                                 id="A-area"
+                                            ></div>
+                                            <script>
+                                                document.getElementById('A-area').style.width =busya/35*100 +'%';
+                                            </script>
+                                        </div>
+                                    </div>
+
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-left navbar-dropdown"
+                                     aria-labelledby="notificationDropdown" x-placement="bottom-start"
+                                     style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 28px, 0px);">
+
+                                    <p class="mb-0 font-weight-normal float-left dropdown-header"
+                                       style="font-size: 20px; font-weight: bolder;text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444; color: orange;">
+                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A区 35</font></font>
+                                    </p>
+
+                                    <a class="dropdown-item">
+                                        <div class="item-content">
+                                            <h6 class="font-weight-normal"><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">可用 <script>document.write(freea)</script></font></font></h6>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item">
+                                        <div class="item-content">
+                                            <h6 class="font-weight-normal"><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">占用 <script>document.write(busya)</script></font></font></h6>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item">
+                                        <div class="item-content">
+                                            <h6 class="font-weight-normal"><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">异常 <script>document.write(errora)</script></font></font></h6>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div class="nav-item dropdown" style="
+    width: 250px;
+    height: 50px;
+    margin:20px;
+">
+
+                                <a class="nav-link count-indicator d-flex align-items-center justify-content-center notification-dropdown"
+                                   id="notificationDropdown" href="#" data-toggle="dropdown" aria-expanded="false"
+                                   style="
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    width: 300px;
+">
+
+                                    <div class="row">
+                                        <h4 style="
+    padding-left: 10px;
+    width: 110px;
+    height: 20px;
+"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">B区</font></font></h4>
+                                        <div class="progress" style="
+    width: 200px;
+    height: 20px;
+">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 70%;"
+                                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="B-area"
+                                            ></div>
+                                            <script>
+                                                document.getElementById('B-area').style.width =busyb/35*100 +'%';
+                                            </script>
+                                        </div>
+                                    </div>
+
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-left navbar-dropdown"
+                                     aria-labelledby="notificationDropdown" x-placement="bottom-start"
+                                     style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 28px, 0px);">
+
+                                    <p class="mb-0 font-weight-normal float-left dropdown-header"
+                                       style="font-size: 20px; font-weight: bolder;text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444; color: orange;">
+                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">B区 35</font></font>
+                                    </p>
+
+                                    <a class="dropdown-item">
+                                        <div class="item-content">
+                                            <h6 class="font-weight-normal"><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">可用 <script>document.write(freeb)</script></font></font></h6>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item">
+                                        <div class="item-content">
+                                            <h6 class="font-weight-normal"><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">占用 <script>document.write(busyb)</script></font></font></h6>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item">
+                                        <div class="item-content">
+                                            <h6 class="font-weight-normal"><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">异常 <script>document.write(errorb)</script></font></font></h6>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div class="nav-item dropdown" style="
+    width: 250px;
+    height: 50px;
+    margin:20px;
+">
+
+                                <a class="nav-link count-indicator d-flex align-items-center justify-content-center notification-dropdown"
+                                   id="notificationDropdown" href="#" data-toggle="dropdown" aria-expanded="false"
+                                   style="
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    width: 300px;
+">
+
+                                    <div class="row">
+                                        <h4 style="
+    padding-left: 10px;
+    width: 110px;
+    height: 20px;
+"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C区</font></font></h4>
+                                        <div class="progress" style="
+    width: 200px;
+    height: 20px;
+">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 45%;"
+                                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" id="C-area"
+                                            ></div>
+                                            <script>
+                                                document.getElementById('C-area').style.width =busyc/35*100 +'%';
+                                            </script>
+                                        </div>
+                                    </div>
+
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-left navbar-dropdown"
+                                     aria-labelledby="notificationDropdown" x-placement="bottom-start"
+                                     style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 28px, 0px);">
+
+                                    <p class="mb-0 font-weight-normal float-left dropdown-header"
+                                       style="font-size: 20px; font-weight: bolder;text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444; color: orange;">
+                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C区 35</font></font>
+                                    </p>
+
+                                    <a class="dropdown-item">
+                                        <div class="item-content">
+                                            <h6 class="font-weight-normal"><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">可用 <script>document.write(freec)</script></font></font></h6>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item">
+                                        <div class="item-content">
+                                            <h6 class="font-weight-normal"><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">占用 <script>document.write(busyc)</script></font></font></h6>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item">
+                                        <div class="item-content">
+                                            <h6 class="font-weight-normal"><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">异常 <script>document.write(errorc)</script></font></font></h6>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div class="nav-item dropdown" style="
+    width: 250px;
+    height: 50px;
+    margin:20px;
+">
+
+                                <a class="nav-link count-indicator d-flex align-items-center justify-content-center notification-dropdown"
+                                   id="notificationDropdown" href="#" data-toggle="dropdown" aria-expanded="false"
+                                   style="
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    width: 300px;
+">
+
+                                    <div class="row">
+                                        <h4 style="
+    padding-left: 10px;
+    width: 110px;
+    height: 20px;
+"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">D区</font></font></h4>
+                                        <div class="progress" style="
+    width: 200px;
+    height: 20px;
+">
+
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"  id="D-area"
+                                            ></div>
+                                            <script>
+                                                document.getElementById('D-area').style.width =busyd/35*100 +'%';
+                                            </script>
+                                        </div>
+                                    </div>
+
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-left navbar-dropdown"
+                                     aria-labelledby="notificationDropdown" x-placement="bottom-start"
+                                     style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 28px, 0px);">
+
+                                    <p class="mb-0 font-weight-normal float-left dropdown-header"
+                                       style="font-size: 20px; font-weight: bolder;text-shadow: -1px -1px 0 #fff,1px 1px 0 #333,1px 1px 0 #444; color: orange;">
+                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">D区 35</font></font>
+                                    </p>
+
+                                    <a class="dropdown-item">
+                                        <div class="item-content">
+                                            <h6 class="font-weight-normal"><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">可用 <script>document.write(freed)</script></font></font></h6>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item">
+                                        <div class="item-content">
+                                            <h6 class="font-weight-normal"><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">占用 <script>document.write(busyd)</script></font></font></h6>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item">
+                                        <div class="item-content">
+                                            <h6 class="font-weight-normal"><font style="vertical-align: inherit;"><font
+                                                    style="vertical-align: inherit;">异常 <script>document.write(errord)</script></font></font></h6>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
